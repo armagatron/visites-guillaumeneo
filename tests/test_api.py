@@ -6,6 +6,11 @@ def test_root_incremente_le_compteur(client):
     assert client.get("/").json() == {"visites": 2}
 
 
+def test_root_renvoie_l_en_tete_de_version(client):
+    response = client.get("/")
+    assert response.headers["X-Visites-Version"] == "0.1.0"
+
+
 def test_health_ok(client):
     response = client.get("/health")
     assert response.status_code == 200
