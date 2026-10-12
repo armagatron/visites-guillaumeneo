@@ -34,3 +34,12 @@ def test_metrics_expose_les_compteurs(client):
     assert response.status_code == 200
     assert "http_requests_total" in response.text
     assert "http_request_duration_seconds" in response.text
+
+
+def test_reset_remet_le_compteur_a_zero(client):
+    client.get("/")
+    client.get("/")
+    response = client.post("/reset")
+    assert response.status_code == 200
+    assert response.json() == {"visites": 0}
+    assert client.get("/").json() == {"visites": 1}
