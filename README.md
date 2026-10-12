@@ -1,4 +1,4 @@
-# Visites
+# Visites ok super nickel
 
 Petite API FastAPI qui compte les visites dans Redis.
 
