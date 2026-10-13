@@ -41,3 +41,24 @@ jetons GitHub eux-même PyPI, npm, Slack… AWS met les clés exposées en quara
 Ce qui nous a pris le plus de temps :
 la clé de signature manquante sur GitHub
 l'ordre des PR (CODEOWNERS avant Dependabot)
+
+TP 3 :
+
+Question 1:
+Environ 45 s à 1 min par job avec les deux jobs en parallèle.
+
+L'étape la plus longue est pre-commit run --all-files 35s : pre-commit reconstruit ses environnements à chaque exécution, dont la compilation de gitleaks. L'installation des dépendances prend 8 s, pytest 2 s.
+Effet mesuré du cache pip (nul). Le vrai gain serait de mettre en cache ~/.cache/pre-commit.
+
+Question 2:
+Le ruleset le permet PR obligatoire (pas de push direct sur main), checks
+test (py3.12) et test (py3.13) requis, et bypass list vide. Sans ruleset,
+le pipeline n'est qu'un avis.
+
+Question 3:
+Déplacer le fichier dans.gitea/workflows/, adapter runs-on aux étiquettes des runners ; la syntaxe et les actions (checkout, setup-python) sont compatibles.
+GitLab CI, tout le fichier, mais les mêmes concepts '.gitlab-ci.yml'
+script: au lieu de steps,parallel: matrix, pour la matrice, cache: et artifacts: comme mots-clés,'rules:' au lieu de 'on:'
+
+Ce qui nous a pris le plus de temps
+les checks requis non enregistrés dans le ruleset act et l'image Docker à configurer pour ubuntu-24.04
