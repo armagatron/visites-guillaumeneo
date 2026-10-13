@@ -1,0 +1,3 @@
+# Faux jeton planté pour le TP02, supprimé et « révoqué » (voir docs/journal.md)
+3676c152f12987457bc6c0675b19bcfbd9dc495c:app/old_settings.py:generic-api-key:2
+c8d482bdec68dce0e7bd5d33e77c72a17dea0dc0:app/old_settings.py:generic-api-key:2
